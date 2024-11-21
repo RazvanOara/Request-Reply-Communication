@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: devicespsd
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data_device:/var/lib/mysql
+    networks:
+      - app-network
+
+  mysql-user-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: userspsd
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data_user:/var/lib/mysql
+    networks:
+      - app-network
+
+  user-management-app:
+    build:
+      context: "./demo"
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-user-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-user-db:3306/userspsd
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SERVER_PORT: 8081
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  device-service-app:
+    build:
+      context: "./demo(1)/"
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/devicespsd
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: "./front/dash/"
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+volumes:
+  mysql_data_device:
+  mysql_data_user:
+
+networks:
+  app-network:
