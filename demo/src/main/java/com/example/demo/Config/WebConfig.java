@@ -11,10 +11,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow all endpoints
-                .allowedOrigins("http://localhost:3000") // Allow your frontend origin
-                .allowedOriginPatterns("*") // Temporarily allow all origins for testing
+                .allowedOriginPatterns("*") // Allow all origins (wildcard for patterns)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
-                .allowCredentials(true) // Allow credentials if needed
+                .allowCredentials(true) // Allow credentials
                 .maxAge(3600); // Cache preflight response for 1 hour
     }
 }

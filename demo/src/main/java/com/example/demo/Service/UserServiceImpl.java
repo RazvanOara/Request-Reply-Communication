@@ -66,4 +66,18 @@ public class UserServiceImpl implements UserService {
 
         userRepository.deleteById(id);
     }
+
+    @Override
+    public User findByName(String name) {
+        System.out.println("Searching for user with name: " + name);
+        User user = userRepository.findByName(name);
+        if (user == null) {
+            System.out.println("User not found in repository: " + name);
+        } else {
+            System.out.println("User found: " + user.getName() + ", email: " + user.getEmail());
+        }
+        return user;
+    }
+    
+
 }
