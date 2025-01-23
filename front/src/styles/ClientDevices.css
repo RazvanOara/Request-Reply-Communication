@@ -1,0 +1,70 @@
+/* ClientDevices.css */
+
+.client-devices-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .client-devices-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .client-devices-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .client-device-item {
+    font-size: 1.2rem;
+    padding: 15px 20px; /* Increased padding for taller rows */
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .client-device-item:hover {
+    background-color: #e6f7ff;
+    transform: scale(1.02);
+  }
+  
+  .device-table {
+    width: 100%;
+    border-collapse: collapse; /* Prevent double borders */
+    margin-top: 20px;
+  }
+  
+  .device-table th,
+  .device-table td {
+    padding: 15px; /* Increased padding for taller cells */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #ccc; /* Add a border to table cells */
+  }
+  
+  .device-table th {
+    background-color: #f2f2f2; /* Light background for header */
+    font-weight: bold;
+  }
+  
+  .device-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping for better readability */
+  }
+  
+  .device-table tr:hover {
+    background-color: #e6f7ff; /* Highlight row on hover */
+  }
+  
+  .no-devices-message {
+    text-align: center;
+    font-size: 1rem;
+    color: #777;
+  }
+  
